@@ -111,10 +111,10 @@ def gauss_newton(data, f, j, x0, k=0.8, tol=1e-3, maxiter=int(100)):
     i = 0
 
     while True:
+        cost[i] = 0.5 * np.linalg.norm(y - f(x, x0))
         jac = np.linalg.pinv(j(x, x0))
         x0 = x0 + k*jac@(y - f(x, x0))
-        cost[i] = 0.5 * np.linalg.norm(y - f(x, x0))
-        if cost[i] <= tol or i >= maxiter:
+        if cost[i] <= tol or i >= maxiter or abs(cost[i]-cost[i-1]) <= tol:
             break
         i += 1
 
@@ -177,7 +177,7 @@ def lm(data, f, j, x0, lmbd0=1e-2, nu=2, tol=1e-5, maxiter=int(30)):
             else:
                 lmbd0 = lmbd0/nu
         i += 1
-        cost[i] = res
+        cost[i] = 0.5 * res
         if res <= tol or abs(cost[i]-cost[i-1]) <= tol or i > maxiter:
             break
         res0 = res
