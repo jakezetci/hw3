@@ -68,6 +68,8 @@ if __name__ == '__main__':
     style_default.set_family(['Calibri', 'Helvetica', 'Arial', 'serif'])
     fig = plt.figure(figsize=(10, 6))
     ax1 = fig.add_subplot(1, 1, 1)
+    plt.title('Модель зависимости модуля расстояния от красного смещения',
+              fontproperties=style_default)
     # если я всё правильно помню, обе оси в безразмерных величинах
     # если вдруг нет, не бейте сильно, это по астрономии пробел
     ax1.set_xlabel('z, красное смещение', fontproperties=style_default)
@@ -82,11 +84,15 @@ if __name__ == '__main__':
 
     fig = plt.figure(figsize=(10, 6))
     ax2 = fig.add_subplot(1, 1, 1)
+    plt.title('Ошибки в методах оптимизации',
+              fontproperties=style_default)
     ax2.set_xlabel('количество итераций', fontproperties=style_default)
     ax2.set_ylabel('ошибка (в логарифмическом масштабе)',
                    fontproperties=style_default)
     gauss, = plt.plot(r_gauss.cost)
     levenberg, = plt.plot(r_lm.cost)
+    plt.xticks(np.arange(0, max(len(r_gauss.cost), len(r_lm.cost)), 1.0),
+               fontsize='large')
     ax2.set_yscale('log')
     gauss.set_label('метод гаусса-ньютона')
     levenberg.set_label('алгоритм левенберга-марквардта')
