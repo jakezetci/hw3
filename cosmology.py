@@ -94,9 +94,11 @@ if __name__ == '__main__':
     plt.savefig('cost.png')
 
     # запись в джейсон
-    dict_gauss = {"H0": r_gauss.x[1], "Omega": r_gauss.x[0],
+    dict_gauss = {"H0": np.round(r_gauss.x[1], decimals=2),
+                  "Omega": np.round(r_gauss.x[0], decimals=2),
                   "nfev": r_gauss.nfev}
-    dict_lm = {"H0": r_lm.x[1], "Omega": r_lm.x[0],
+    dict_lm = {"H0": np.round(r_lm.x[1], decimals=2),
+               "Omega": np.round(r_lm.x[0], decimals=2),
                "nfev": r_lm.nfev}
     d = {
         "Gauss-Newton": dict_gauss,
